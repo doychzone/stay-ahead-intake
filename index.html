@@ -1368,20 +1368,48 @@ async function submitForm() {
 
   const data = collectData();
 
-  // !! REPLACE with your deployed Apps Script Web App URL !!
-  const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9yZesWg1QAASG9aMFm1-f9c4Hj72B1I2CydEG_lUXai8a1VqFtH74tzkj0EzAinhi/exec';
 
   try {
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    // no-cors: cannot read response body, but if no error thrown = success
-    document.getElementById('main-form').style.display = 'none';
-    document.getElementById('success-screen').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Use a hidden form POST to bypass CORS — works reliably with Apps Script
+    const iframe = document.createElement('iframe');
+    iframe.name = 'hidden_iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = APPS_SCRIPT_URL;
+    form.target = 'hidden_iframe';
+    form.style.display = 'none';
+
+    // Send all data as a single JSON field
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'payload';
+    input.value = JSON.stringify(data);
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+
+    // Show success after a short delay (iframe load)
+    iframe.onload = function() {
+      document.getElementById('main-form').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    form.submit();
+
+    // Fallback: show success after 3 seconds regardless
+    setTimeout(() => {
+      if (document.getElementById('main-form').style.display !== 'none') {
+        document.getElementById('main-form').style.display = 'none';
+        document.getElementById('success-screen').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 3000);
+
   } catch (err) {
     btn.textContent = 'Submit Your Intake →';
     btn.disabled = false;
