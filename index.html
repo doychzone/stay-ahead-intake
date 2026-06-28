@@ -1370,53 +1370,49 @@ async function submitForm() {
 
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9yZesWg1QAASG9aMFm1-f9c4Hj72B1I2CydEG_lUXai8a1VqFtH74tzkj0EzAinhi/exec';
 
-  try {
-    // Use a hidden form POST to bypass CORS — works reliably with Apps Script
-    const iframe = document.createElement('iframe');
-    iframe.name = 'hidden_iframe';
-    iframe.style.display = 'none';
-    document.body.appendChild(iframe);
+  // JSONP approach — bypasses CORS completely with Apps Script
+  const callbackName = 'gsCallback_' + Date.now();
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = APPS_SCRIPT_URL;
-    form.target = 'hidden_iframe';
-    form.style.display = 'none';
+  window[callbackName] = function(response) {
+    // Cleanup
+    delete window[callbackName];
+    const script = document.getElementById('jsonp_script');
+    if (script) script.remove();
 
-    // Send all data as a single JSON field
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'payload';
-    input.value = JSON.stringify(data);
-    form.appendChild(input);
+    // Show success
+    document.getElementById('main-form').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-    document.body.appendChild(form);
+  // Encode data as URL parameter
+  const encoded = encodeURIComponent(JSON.stringify(data));
+  const url = APPS_SCRIPT_URL + '?callback=' + callbackName + '&payload=' + encoded;
 
-    // Show success after a short delay (iframe load)
-    iframe.onload = function() {
-      document.getElementById('main-form').style.display = 'none';
-      document.getElementById('success-screen').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    form.submit();
-
-    // Fallback: show success after 3 seconds regardless
-    setTimeout(() => {
-      if (document.getElementById('main-form').style.display !== 'none') {
-        document.getElementById('main-form').style.display = 'none';
-        document.getElementById('success-screen').style.display = 'block';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }, 3000);
-
-  } catch (err) {
+  const script = document.createElement('script');
+  script.id = 'jsonp_script';
+  script.src = url;
+  script.onerror = function() {
+    delete window[callbackName];
+    script.remove();
     btn.textContent = 'Submit Your Intake →';
     btn.disabled = false;
     const errEl = document.getElementById('error-msg');
     errEl.textContent = 'Something went wrong. Please try again or email your responses directly to doych@doychzone.com.';
     errEl.style.display = 'block';
-  }
+  };
+
+  // Fallback: show success after 8 seconds if callback never fires
+  setTimeout(() => {
+    if (document.getElementById('main-form').style.display !== 'none') {
+      delete window[callbackName];
+      document.getElementById('main-form').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, 8000);
+
+  document.body.appendChild(script);
 }
 </script>
 </body>
