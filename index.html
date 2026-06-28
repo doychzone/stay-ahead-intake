@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stay Ahead — Intake Questionnaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Georgia&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green: #1D9E75; --green-light: #E8F5F0; --green-dark: #157A5A;
+  --bg: #F4F8F6; --dark: #0F2B24; --text: #1A2E28; --muted: #5A7268;
+  --border: #D1E0D9; --white: #FFFFFF; --red: #C0392B;
+  --radius: 10px; --shadow: 0 2px 12px rgba(15,43,36,0.08);
+}
+html { scroll-behavior: smooth; }
+body { font-family: "Inter", sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; min-height: 100vh; }
+
+.site-header { background: var(--dark); padding: 20px 24px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.header-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; color: rgba(255,255,255,0.45); text-transform: uppercase; text-align: right; line-height: 1.4; }
+
+.progress-bar-wrap { background: var(--dark); padding: 0 24px 16px; position: sticky; top: 64px; z-index: 99; }
+.progress-info { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 8px; font-weight: 500; letter-spacing: 0.04em; }
+.progress-track { height: 3px; background: rgba(255,255,255,0.12); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--green); border-radius: 2px; transition: width 0.4s ease; }
+
+.form-wrap { max-width: 680px; margin: 0 auto; padding: 32px 16px 80px; }
+.section-hero { margin-bottom: 28px; }
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; color: var(--green); text-transform: uppercase; margin-bottom: 8px; }
+.section-title { font-size: 26px; font-weight: 600; color: var(--dark); line-height: 1.2; margin-bottom: 10px; }
+.section-desc { font-size: 14px; color: var(--muted); line-height: 1.65; font-style: italic; }
+
+.card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px 20px; margin-bottom: 16px; }
+.card-title { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--green); text-transform: uppercase; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+
+.field { margin-bottom: 22px; }
+.field:last-child { margin-bottom: 0; }
+label { display: block; font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 7px; line-height: 1.4; }
+.required-star { color: var(--green); margin-left: 2px; }
+.field-hint { font-size: 12px; color: var(--muted); margin-bottom: 8px; line-height: 1.5; }
+.optional-badge { font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 6px; font-style: italic; }
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="date"],
+input[type="number"], select, textarea {
+  width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 7px;
+  font-family: "Inter", sans-serif; font-size: 14px; color: var(--text); background: var(--white);
+  transition: border-color 0.15s, box-shadow 0.15s; -webkit-appearance: none; appearance: none;
+}
+select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A7268' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; cursor: pointer; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(29,158,117,0.12); }
+textarea { resize: vertical; min-height: 90px; }
+input.invalid, select.invalid, textarea.invalid { border-color: var(--red); }
+
+.field-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 420px) { .field-grid-2 { grid-template-columns: 1fr; } }
+
+.options-list { display: flex; flex-direction: column; gap: 8px; }
+.options-list.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 420px) { .options-list.two-col { grid-template-columns: 1fr; } }
+.option-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 7px; cursor: pointer; transition: border-color 0.15s, background 0.15s; line-height: 1.35; font-size: 14px; -webkit-tap-highlight-color: transparent; }
+.option-item:hover { border-color: var(--green); background: var(--green-light); }
+.option-item input[type="radio"], .option-item input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; border: 1.5px solid var(--border); cursor: pointer; padding: 0; margin-top: 1px; accent-color: var(--green); }
+.option-item input[type="radio"] { border-radius: 50%; }
+.option-item:has(input:checked) { border-color: var(--green); background: var(--green-light); }
+
+.slider-field { margin-bottom: 28px; }
+.slider-field:last-child { margin-bottom: 0; }
+.slider-label-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; gap: 8px; }
+.slider-q { font-size: 13.5px; font-weight: 500; color: var(--text); flex: 1; line-height: 1.4; }
+.slider-value { font-size: 15px; font-weight: 600; color: var(--green); min-width: 28px; text-align: right; }
+.slider-ends { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+input[type="range"] { width: 100%; height: 6px; background: var(--border); border-radius: 3px; border: none; outline: none; padding: 0; cursor: pointer; accent-color: var(--green); }
+
+.test-card { background: var(--bg); border-radius: 8px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); }
+.test-card:last-child { margin-bottom: 0; }
+.test-header { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+.test-num { width: 24px; height: 24px; min-width: 24px; background: var(--green); color: white; border-radius: 50%; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+.test-title { font-size: 13.5px; font-weight: 600; color: var(--dark); line-height: 1.3; }
+.test-desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; padding-left: 34px; line-height: 1.5; }
+.test-ref { font-size: 11px; color: var(--muted); background: rgba(29,158,117,0.06); border-radius: 5px; padding: 6px 10px; margin-bottom: 10px; margin-left: 34px; line-height: 1.5; border-left: 2px solid var(--green); }
+.test-inputs { padding-left: 34px; }
+
+.conditional { display: none; }
+.conditional.visible { display: block; margin-top: 10px; }
+
+.section-page { display: none; }
+.section-page.active { display: block; }
+
+.nav-buttons { display: flex; gap: 12px; margin-top: 28px; justify-content: space-between; align-items: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 24px; border-radius: 8px; font-family: "Inter", sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; border: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.btn-primary { background: var(--green); color: white; flex: 1; max-width: 280px; }
+.btn-primary:hover { background: var(--green-dark); }
+.btn-primary:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+.btn-secondary { background: transparent; color: var(--muted); border: 1.5px solid var(--border); padding: 12px 20px; }
+.btn-secondary:hover { border-color: var(--green); color: var(--green); }
+
+.submit-section { text-align: center; margin-top: 32px; }
+.btn-submit { background: var(--green); color: white; padding: 16px 40px; font-size: 16px; border-radius: 9px; width: 100%; max-width: 380px; }
+.btn-submit:hover { background: var(--green-dark); }
+
+#success-screen { display: none; text-align: center; padding: 60px 24px; max-width: 500px; margin: 0 auto; }
+.success-icon { width: 64px; height: 64px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+.success-title { font-size: 24px; font-weight: 600; color: var(--dark); margin-bottom: 12px; }
+.success-text { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+.error-msg { display: none; background: #FEF0EE; border: 1px solid #F5C6C0; border-radius: 7px; padding: 12px 16px; color: var(--red); font-size: 13px; margin-top: 16px; }
+.section-divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.data-note { background: rgba(29,158,117,0.06); border-left: 3px solid var(--green); border-radius: 0 7px 7px 0; padding: 12px 14px; font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+.consent-item { background: var(--bg); border-radius: 8px; padding: 16px; margin-bottom: 14px; border: 1px solid var(--border); }
+.consent-text { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+.consent-check { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+.consent-check input { width: 18px; height: 18px; min-width: 18px; margin-top: 2px; padding: 0; cursor: pointer; accent-color: var(--green); }
+.consent-check span { font-size: 13.5px; font-weight: 500; color: var(--text); line-height: 1.4; }
+.priority-note { font-size: 12px; color: var(--green); font-weight: 500; margin-top: 5px; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="160" height="38">
+      <path d="M 16 26 Q 26 14 36 26" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <line x1="16" y1="26" x2="13" y2="30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <line x1="36" y1="26" x2="39" y2="30" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <line x1="26" y1="26" x2="26" y2="38" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <path d="M 26 38 Q 26 42 22 42" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="26" cy="14" r="1.6" fill="white"/>
+      <text x="52" y="22" font-family="Georgia, serif" font-size="12" fill="white" letter-spacing="0.8">Making Sense</text>
+      <text x="52" y="35" font-family="Georgia, serif" font-size="7.5" fill="rgba(255,255,255,0.55)" letter-spacing="2.5">LONGEVITY INTELLIGENCE</text>
+    </svg>
+  </div>
+  <div class="header-tag">Stay Ahead<br>Intake 2026</div>
+</header>
+
+<div class="progress-bar-wrap">
+  <div class="progress-info"><span id="progress-label">Section 1 of 8</span><span id="progress-pct">12%</span></div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:12%"></div></div>
+</div>
+
+<div class="form-wrap">
+<div id="main-form">
+<!-- SECTION 1 -->
+<div class="section-page active" id="section-1">
+  <div class="section-hero">
+    <div class="section-label">Section 1 of 8</div>
+    <div class="section-title">Who You Are</div>
+    <div class="section-desc">Basic profile and your first words about why you are here.</div>
+  </div>
+  <div class="card">
+    <div class="field-grid-2">
+      <div class="field"><label>Full name <span class="required-star">*</span></label><input type="text" id="s1_name" placeholder="Your full name" required></div>
+      <div class="field"><label>Date of birth <span class="required-star">*</span></label><input type="date" id="s1_dob" required></div>
+    </div>
+    <div class="field">
+      <label>Gender <span class="required-star">*</span></label>
+      <div class="options-list" style="flex-direction:row;flex-wrap:wrap;gap:8px;">
+        <label class="option-item" style="flex:1;min-width:120px;"><input type="radio" name="s1_gender" value="Male"> Male</label>
+        <label class="option-item" style="flex:1;min-width:120px;"><input type="radio" name="s1_gender" value="Female"> Female</label>
+        <label class="option-item" style="flex:1;min-width:120px;"><input type="radio" name="s1_gender" value="Prefer not to say"> Prefer not to say</label>
+      </div>
+    </div>
+    <div class="field-grid-2">
+      <div class="field"><label>City <span class="required-star">*</span></label><input type="text" id="s1_city" placeholder="Your city" required></div>
+      <div class="field"><label>Country <span class="required-star">*</span></label><input type="text" id="s1_country" placeholder="Your country" required></div>
+    </div>
+    <div class="field-grid-2">
+      <div class="field"><label>Nationality <span class="required-star">*</span></label><input type="text" id="s1_nationality" placeholder="e.g. Bulgarian, American" required></div>
+      <div class="field"><label>Education level <span class="required-star">*</span></label>
+        <select id="s1_education" required>
+          <option value="">Select...</option>
+          <option>High school</option><option>Bachelor's degree</option><option>Master's degree</option>
+          <option>PhD or doctorate</option><option>Professional degree (MD, JD, etc.)</option>
+          <option>Vocational / trade qualification</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>Occupation / professional role <span class="optional-badge">optional</span></label><input type="text" id="s1_occupation" placeholder="e.g. Senior executive, Entrepreneur, Physician"></div>
+    <div class="field-grid-2">
+      <div class="field"><label>Email address <span class="required-star">*</span></label><input type="email" id="s1_email" placeholder="your@email.com" required></div>
+      <div class="field"><label>Phone number <span class="optional-badge">optional</span></label><input type="tel" id="s1_phone" placeholder="+1 or +359..."></div>
+    </div>
+    <div class="field">
+      <label>English proficiency <span class="required-star">*</span></label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="s1_english" value="Fluent"> Fluent — I think and communicate naturally in English</label>
+        <label class="option-item"><input type="radio" name="s1_english" value="Working level"> Working level — comfortable for professional and health discussions</label>
+        <label class="option-item"><input type="radio" name="s1_english" value="Basic"> Basic — can follow along but may need support</label>
+        <label class="option-item"><input type="radio" name="s1_english" value="None"> None — I need Bulgarian</label>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="field">
+      <label>Tell us about yourself and why you want to be part of this program. <span class="required-star">*</span></label>
+      <div class="field-hint">What brought you here, and what are you hoping to understand about your health and longevity?</div>
+      <textarea id="s1_why" rows="5" placeholder="Take your time. You may repeat anything you wrote in your application email." required></textarea>
+    </div>
+    <div class="field">
+      <label>How familiar are you with Doychin Karshovski's work? <span class="required-star">*</span></label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="s1_familiarity" value="New — first contact"> I'm new — this program is my first contact</label>
+        <label class="option-item"><input type="radio" name="s1_familiarity" value="Follow on social media"> I follow Doychin on social media</label>
+        <label class="option-item"><input type="radio" name="s1_familiarity" value="Read TEMELI books"> I've read one or more of the TEMELI books</label>
+        <label class="option-item"><input type="radio" name="s1_familiarity" value="Watched videos / podcasts"> I've watched videos or films or listened to podcasts</label>
+        <label class="option-item"><input type="radio" name="s1_familiarity" value="Attended Making Sense event"> I've attended a Making Sense event</label>
+        <label class="option-item"><input type="radio" name="s1_familiarity" value="Previous client or participant"> I've worked with Doychin before</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Which of Doychin's books and films have you experienced? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="s1_books" value="Дишам / iBreathe"> Дишам / iBreathe</label>
+        <label class="option-item"><input type="checkbox" name="s1_books" value="Спя / iSleep"> Спя / iSleep</label>
+        <label class="option-item"><input type="checkbox" name="s1_books" value="Играя / iMove"> Играя / iMove</label>
+        <label class="option-item"><input type="checkbox" name="s1_books" value="Ям / iEat"> Ям / iEat</label>
+        <label class="option-item"><input type="checkbox" name="s1_books" value="Инвестирам в здраве"> Инвестирам в здраве</label>
+        <label class="option-item"><input type="checkbox" name="s1_books" value="СЪМ / iAm"> СЪМ / iAm</label>
+        <label class="option-item"><input type="checkbox" name="s1_books" value="Пари на вятъра"> Пари на вятъра</label>
+        <label class="option-item"><input type="checkbox" name="s1_books" value="None"> None of the above</label>
+      </div>
+    </div>
+  </div>
+  <div class="nav-buttons"><div></div><button class="btn btn-primary" onclick="goNext(1)">Continue — Your Health Picture →</button></div>
+</div>
+<!-- SECTION 2 -->
+<div class="section-page" id="section-2">
+  <div class="section-hero">
+    <div class="section-label">Section 2 of 8</div>
+    <div class="section-title">Your Health Picture</div>
+    <div class="section-desc">Not a full medical history. Only what may genuinely change the recommendations in your Map.</div>
+  </div>
+  <div class="card">
+    <div class="field">
+      <label>Do you currently have any diagnosed chronic conditions? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Cardiovascular disease"> Cardiovascular disease</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Type 2 diabetes or pre-diabetes"> Type 2 diabetes / pre-diabetes</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Thyroid dysfunction"> Thyroid dysfunction</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Autoimmune condition"> Autoimmune condition</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Cancer (current or in remission)"> Cancer (current or remission)</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Metabolic syndrome"> Metabolic syndrome</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Osteoporosis or osteopenia"> Osteoporosis / osteopenia</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Chronic pain or musculoskeletal"> Chronic pain / musculoskeletal</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Mental health diagnosis"> Mental health diagnosis</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="None"> None of the above</label>
+        <label class="option-item"><input type="checkbox" name="s2_conditions" value="Prefer not to say"> Prefer not to say</label>
+      </div>
+      <div style="margin-top:10px;"><input type="text" id="s2_conditions_other" placeholder="Other condition — specify here"></div>
+    </div>
+    <div class="field">
+      <label>Are you currently taking any medications or prescribed supplements? <span class="required-star">*</span></label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="s2_meds" value="Yes" onchange="toggleConditional('s2_meds_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="s2_meds" value="No" onchange="toggleConditional('s2_meds_cond', false)"> No</label>
+      </div>
+      <div class="conditional" id="s2_meds_cond"><textarea id="s2_meds_list" rows="3" placeholder="Name and dose where possible (e.g. Metformin 500mg, Vitamin D 2000 IU)"></textarea></div>
+    </div>
+    <div class="field">
+      <label>Have you had any surgeries or significant medical procedures in the last 5 years? <span class="required-star">*</span></label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="s2_surgeries" value="Yes" onchange="toggleConditional('s2_surg_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="s2_surgeries" value="No" onchange="toggleConditional('s2_surg_cond', false)"> No</label>
+      </div>
+      <div class="conditional" id="s2_surg_cond"><textarea id="s2_surgeries_detail" rows="2" placeholder="Please describe briefly"></textarea></div>
+    </div>
+    <div class="field">
+      <label>Significant family history? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="s2_family" value="Cardiovascular disease"> Cardiovascular disease</label>
+        <label class="option-item"><input type="checkbox" name="s2_family" value="Type 2 diabetes"> Type 2 diabetes</label>
+        <label class="option-item"><input type="checkbox" name="s2_family" value="Cancer"> Cancer</label>
+        <label class="option-item"><input type="checkbox" name="s2_family" value="Alzheimer's or dementia"> Alzheimer's / dementia</label>
+        <label class="option-item"><input type="checkbox" name="s2_family" value="Osteoporosis"> Osteoporosis</label>
+        <label class="option-item"><input type="checkbox" name="s2_family" value="None that I'm aware of"> None I'm aware of</label>
+        <label class="option-item"><input type="checkbox" name="s2_family" value="Prefer not to say"> Prefer not to say</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>For women — current hormonal status? <span class="optional-badge">optional</span></label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="s2_hormonal" value="Pre-menopausal"> Pre-menopausal</label>
+        <label class="option-item"><input type="radio" name="s2_hormonal" value="Peri-menopausal"> Peri-menopausal</label>
+        <label class="option-item"><input type="radio" name="s2_hormonal" value="Post-menopausal"> Post-menopausal</label>
+        <label class="option-item"><input type="radio" name="s2_hormonal" value="On HRT or hormonal therapy"> On HRT / hormonal therapy</label>
+        <label class="option-item"><input type="radio" name="s2_hormonal" value="Prefer not to say"> Prefer not to say</label>
+        <label class="option-item"><input type="radio" name="s2_hormonal" value="Not applicable"> Not applicable</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Known allergies?</label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="s2_allergies" value="Yes" onchange="toggleConditional('s2_allerg_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="s2_allergies" value="None" onchange="toggleConditional('s2_allerg_cond', false)"> None</label>
+      </div>
+      <div class="conditional" id="s2_allerg_cond"><textarea id="s2_allergies_list" rows="2" placeholder="e.g. penicillin, shellfish, pollen, latex"></textarea></div>
+    </div>
+    <div class="field">
+      <label>Anything else we should know before testing begins? <span class="optional-badge">optional</span></label>
+      <textarea id="s2_other_notes" rows="3" placeholder="Injuries, contraindications to exercise, pregnancy, anything that could affect the protocol"></textarea>
+    </div>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo(1)">← Back</button>
+    <button class="btn btn-primary" onclick="goNext(2)">Continue — TEMELI Assessment →</button>
+  </div>
+</div>
+<!-- SECTION 3 -->
+<div class="section-page" id="section-3">
+  <div class="section-hero">
+    <div class="section-label">Section 3 of 8</div>
+    <div class="section-title">Your TEMELI Self-Assessment</div>
+    <div class="section-desc">This is the heart of the questionnaire. Be honest — there are no right or wrong answers, only accurate ones.</div>
+  </div>
+
+  <!-- BREATH -->
+  <div class="card">
+    <div class="card-title">Breath</div>
+    <div class="field-hint" style="margin-bottom:20px;">Mark where you actually are right now — not your goal, not your good weeks.</div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I breathe through my nose during daily activity (walking, desk work, light tasks).</span><span class="slider-value" id="b1-val">50</span></div><div class="slider-ends"><span>Always mouth breathe</span><span>Always nasal</span></div><input type="range" id="b1" min="0" max="100" value="50" oninput="updateSlider('b1')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My breathing is calm and slow at rest — I rarely feel short of breath without physical cause.</span><span class="slider-value" id="b2-val">50</span></div><div class="slider-ends"><span>Often labored at rest</span><span>Consistently calm</span></div><input type="range" id="b2" min="0" max="100" value="50" oninput="updateSlider('b2')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I am aware of my breathing and can consciously slow it down when needed.</span><span class="slider-value" id="b3-val">50</span></div><div class="slider-ends"><span>No awareness or control</span><span>Full awareness and control</span></div><input type="range" id="b3" min="0" max="100" value="50" oninput="updateSlider('b3')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My breathing does not disturb my sleep (no snoring, sleep apnea, or waking with dry mouth).</span><span class="slider-value" id="b4-val">50</span></div><div class="slider-ends"><span>Significant disruption</span><span>No disruption</span></div><input type="range" id="b4" min="0" max="100" value="50" oninput="updateSlider('b4')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I practice deliberate breathwork (box breathing, diaphragmatic, breath holds) at least 3x/week.</span><span class="slider-value" id="b5-val">50</span></div><div class="slider-ends"><span>Never</span><span>Daily practice</span></div><input type="range" id="b5" min="0" max="100" value="50" oninput="updateSlider('b5')"></div>
+  </div>
+
+  <!-- SLEEP -->
+  <div class="card">
+    <div class="card-title">Sleep</div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I sleep between 7 and 9 hours most nights.</span><span class="slider-value" id="sl1-val">50</span></div><div class="slider-ends"><span>Consistently under 6 or over 9</span><span>7-9 hours consistently</span></div><input type="range" id="sl1" min="0" max="100" value="50" oninput="updateSlider('sl1')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I fall asleep within 20 minutes of intending to sleep.</span><span class="slider-value" id="sl2-val">50</span></div><div class="slider-ends"><span>Often takes 45+ minutes</span><span>Within 20 min reliably</span></div><input type="range" id="sl2" min="0" max="100" value="50" oninput="updateSlider('sl2')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I wake feeling rested and do not need an alarm to feel functional.</span><span class="slider-value" id="sl3-val">50</span></div><div class="slider-ends"><span>Never feel rested</span><span>Wake naturally, feel rested</span></div><input type="range" id="sl3" min="0" max="100" value="50" oninput="updateSlider('sl3')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I have a consistent sleep and wake time (within 30 minutes) even on weekends.</span><span class="slider-value" id="sl4-val">50</span></div><div class="slider-ends"><span>No consistency at all</span><span>Fully consistent</span></div><input type="range" id="sl4" min="0" max="100" value="50" oninput="updateSlider('sl4')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My bedroom is dark, cool, and free of screens during sleep.</span><span class="slider-value" id="sl5-val">50</span></div><div class="slider-ends"><span>None of these conditions met</span><span>All conditions met</span></div><input type="range" id="sl5" min="0" max="100" value="50" oninput="updateSlider('sl5')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I do not use alcohol, sleep aids, or phones in the hour before sleep.</span><span class="slider-value" id="sl6-val">50</span></div><div class="slider-ends"><span>Regular use of all three</span><span>None, consistently</span></div><input type="range" id="sl6" min="0" max="100" value="50" oninput="updateSlider('sl6')"></div>
+  </div>
+
+  <!-- MOVEMENT BEHAVIOR -->
+  <div class="card">
+    <div class="card-title">Movement — Behavior</div>
+    <div class="field">
+      <label>How many days per week do you engage in structured exercise? <span class="required-star">*</span></label>
+      <div class="options-list" style="flex-direction:row;flex-wrap:wrap;gap:8px;">
+        <label class="option-item" style="flex:1;min-width:80px;justify-content:center;text-align:center;"><input type="radio" name="mv_days" value="0 days"> 0 days</label>
+        <label class="option-item" style="flex:1;min-width:80px;justify-content:center;text-align:center;"><input type="radio" name="mv_days" value="1-2 days"> 1-2 days</label>
+        <label class="option-item" style="flex:1;min-width:80px;justify-content:center;text-align:center;"><input type="radio" name="mv_days" value="3-4 days"> 3-4 days</label>
+        <label class="option-item" style="flex:1;min-width:80px;justify-content:center;text-align:center;"><input type="radio" name="mv_days" value="5+ days"> 5+ days</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Types of movement you currently practice? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="mv_types" value="Resistance training / weights"> Resistance training / weights</label>
+        <label class="option-item"><input type="checkbox" name="mv_types" value="Zone 2 cardio"> Zone 2 cardio</label>
+        <label class="option-item"><input type="checkbox" name="mv_types" value="High intensity (HIIT)"> HIIT / high intensity</label>
+        <label class="option-item"><input type="checkbox" name="mv_types" value="Yoga / Pilates / mobility"> Yoga / Pilates / mobility</label>
+        <label class="option-item"><input type="checkbox" name="mv_types" value="Team or racquet sports"> Team / racquet sports</label>
+        <label class="option-item"><input type="checkbox" name="mv_types" value="Martial arts"> Martial arts</label>
+        <label class="option-item"><input type="checkbox" name="mv_types" value="None currently"> None currently</label>
+      </div>
+      <div style="margin-top:8px;"><input type="text" id="mv_types_other" placeholder="Other types of movement"></div>
+    </div>
+    <div class="field">
+      <label>How much do you move outside of structured exercise?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="mv_incidental" value="Very active"> Very active — on my feet most of the day</label>
+        <label class="option-item"><input type="radio" name="mv_incidental" value="Moderately active"> Moderately active — some walking, some sitting</label>
+        <label class="option-item"><input type="radio" name="mv_incidental" value="Mostly sedentary"> Mostly sedentary — desk-based, little incidental movement</label>
+        <label class="option-item"><input type="radio" name="mv_incidental" value="Almost entirely sedentary"> Almost entirely sedentary</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Physical limitations affecting exercise?</label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="mv_limitations" value="Yes" onchange="toggleConditional('mv_lim_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="mv_limitations" value="No" onchange="toggleConditional('mv_lim_cond', false)"> No</label>
+      </div>
+      <div class="conditional" id="mv_lim_cond"><textarea id="mv_limitations_detail" rows="2" placeholder="Please describe briefly"></textarea></div>
+    </div>
+  </div>
+
+  <!-- MOVEMENT STATEMENTS -->
+  <div class="card">
+    <div class="card-title">Movement — TEMELI Statements</div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I accumulate at least 7,000 steps or equivalent low-intensity movement daily.</span><span class="slider-value" id="ms1-val">50</span></div><div class="slider-ends"><span>Under 3,000 steps/day</span><span>10,000+ steps consistently</span></div><input type="range" id="ms1" min="0" max="100" value="50" oninput="updateSlider('ms1')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I complete structured resistance training (weights, bodyweight) at least 2 times per week.</span><span class="slider-value" id="ms2-val">50</span></div><div class="slider-ends"><span>Never</span><span>3+ times per week</span></div><input type="range" id="ms2" min="0" max="100" value="50" oninput="updateSlider('ms2')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I complete structured cardiovascular training (sustained aerobic effort) at least 2 times per week.</span><span class="slider-value" id="ms3-val">50</span></div><div class="slider-ends"><span>Never</span><span>3+ times per week</span></div><input type="range" id="ms3" min="0" max="100" value="50" oninput="updateSlider('ms3')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I include mobility, flexibility, or balance work in my weekly routine.</span><span class="slider-value" id="ms4-val">50</span></div><div class="slider-ends"><span>Never</span><span>Daily or near-daily</span></div><input type="range" id="ms4" min="0" max="100" value="50" oninput="updateSlider('ms4')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I have no significant pain, injury, or limitation that affects my movement choices.</span><span class="slider-value" id="ms5-val">50</span></div><div class="slider-ends"><span>Significant limitation</span><span>No limitation</span></div><input type="range" id="ms5" min="0" max="100" value="50" oninput="updateSlider('ms5')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My exercise is planned and consistent, not reactive (only when I feel good or have time).</span><span class="slider-value" id="ms6-val">50</span></div><div class="slider-ends"><span>Entirely reactive</span><span>Fully planned and consistent</span></div><input type="range" id="ms6" min="0" max="100" value="50" oninput="updateSlider('ms6')"></div>
+  </div>
+  <!-- FUNCTIONAL TESTS -->
+  <div class="card">
+    <div class="card-title">Movement — Functional Baseline Tests</div>
+    <div class="data-note">Please perform the following 8 tests before continuing. They take 10-15 minutes and require only a chair, a wall, and a phone timer. There are no good or bad scores — only honest ones.</div>
+
+    <div class="test-card">
+      <div class="test-header"><div class="test-num">1</div><div class="test-title">Chair Stand — Strength &amp; Mobility</div></div>
+      <div class="test-desc">Stand up from a chair and sit back down without using your arms. Count how many complete stands in 30 seconds.</div>
+      <div class="test-ref">Reference: 40s: 14-16 · 50s: 12-14 · 60s: 10-12 · 70+: 8-10</div>
+      <div class="test-inputs"><input type="number" id="t1_reps" placeholder="Complete stands in 30 sec (e.g. 12)" min="0" max="30"></div>
+    </div>
+
+    <div class="test-card">
+      <div class="test-header"><div class="test-num">2</div><div class="test-title">Single Leg Stand — Balance</div></div>
+      <div class="test-desc">Stand on one foot without shoes, hands on hips, eyes open. Time how long you can hold without touching the ground.</div>
+      <div class="test-ref">Reference: 60+ sec = excellent · 20-60 = good · under 20 = priority area</div>
+      <div class="test-inputs">
+        <div class="field-grid-2">
+          <div><label style="font-size:12px;font-weight:500;margin-bottom:5px;">Left leg (seconds)</label><input type="number" id="t2_left" placeholder="e.g. 45" min="0"></div>
+          <div><label style="font-size:12px;font-weight:500;margin-bottom:5px;">Right leg (seconds)</label><input type="number" id="t2_right" placeholder="e.g. 52" min="0"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-card">
+      <div class="test-header"><div class="test-num">3</div><div class="test-title">Sit and Reach — Flexibility</div></div>
+      <div class="test-desc">Sit on the floor with legs straight. Reach forward toward your toes.</div>
+      <div class="test-inputs">
+        <div class="options-list">
+          <label class="option-item"><input type="radio" name="t3_reach" value="Past my feet"> Past my feet — fingers beyond toes</label>
+          <label class="option-item"><input type="radio" name="t3_reach" value="At my feet"> At my feet — fingers touching toes</label>
+          <label class="option-item"><input type="radio" name="t3_reach" value="1-10 cm short"> 1-10 cm short of feet</label>
+          <label class="option-item"><input type="radio" name="t3_reach" value="10-20 cm short"> 10-20 cm short of feet</label>
+          <label class="option-item"><input type="radio" name="t3_reach" value="More than 20 cm short"> More than 20 cm short</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-card">
+      <div class="test-header"><div class="test-num">4</div><div class="test-title">Plank Hold — Core &amp; Endurance</div></div>
+      <div class="test-desc">Hold a plank position for as long as possible with correct form.</div>
+      <div class="test-inputs">
+        <div class="field">
+          <label style="font-size:12px;font-weight:500;">Position used</label>
+          <div class="options-list" style="margin-bottom:10px;">
+            <label class="option-item"><input type="radio" name="t4_position" value="Forearm plank"> Forearm plank</label>
+            <label class="option-item"><input type="radio" name="t4_position" value="Full plank (straight arms)"> Full plank (straight arms)</label>
+            <label class="option-item"><input type="radio" name="t4_position" value="Modified (knees down)"> Modified (knees down)</label>
+            <label class="option-item"><input type="radio" name="t4_position" value="Could not perform"> Could not perform</label>
+          </div>
+          <input type="number" id="t4_time" placeholder="Time held in seconds (e.g. 45)" min="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="test-card">
+      <div class="test-header"><div class="test-num">5</div><div class="test-title">Towel Squeeze — Grip Strength</div></div>
+      <div class="test-desc">Roll a towel tightly. Squeeze with full force for 5 seconds. Rate your perceived grip strength.</div>
+      <div class="test-inputs">
+        <div class="options-list" style="margin-bottom:10px;">
+          <label class="option-item"><input type="radio" name="t5_rating" value="Very strong — no effort"> Very strong — no effort to squeeze firmly</label>
+          <label class="option-item"><input type="radio" name="t5_rating" value="Moderate — some effort"> Moderate — some effort required</label>
+          <label class="option-item"><input type="radio" name="t5_rating" value="Weak — difficulty maintaining"> Weak — difficulty maintaining a firm grip</label>
+          <label class="option-item"><input type="radio" name="t5_rating" value="Significant weakness or pain"> Significant weakness or pain</label>
+        </div>
+        <div class="field-grid-2">
+          <div><label style="font-size:12px;font-weight:500;">Left hand (kg) <span style="font-weight:400;color:var(--muted)">if dynamometer</span></label><input type="number" id="t5_left" placeholder="e.g. 38" step="0.1"></div>
+          <div><label style="font-size:12px;font-weight:500;">Right hand (kg) <span style="font-weight:400;color:var(--muted)">if dynamometer</span></label><input type="number" id="t5_right" placeholder="e.g. 41" step="0.1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="test-card">
+      <div class="test-header"><div class="test-num">6</div><div class="test-title">Ruler Drop — Reaction Time</div></div>
+      <div class="test-desc">Ask someone to hold a ruler vertically at 0 cm. Place your thumb and index finger at the 0 mark. When they drop it without warning — catch it. Repeat 3 times and record the average.</div>
+      <div class="test-ref">Reference: under 15 cm = excellent · 15-20 = good · over 20 = work needed</div>
+      <div class="test-inputs"><input type="number" id="t6_cm" placeholder="Average catch point over 3 attempts (cm, e.g. 17)" min="0" max="50" step="0.5"></div>
+    </div>
+
+    <div class="test-card">
+      <div class="test-header"><div class="test-num">7</div><div class="test-title">3-Minute Step Test — Cardiovascular Efficiency</div></div>
+      <div class="test-desc">Step up and down on a step (~30 cm) at a rhythm of 24 steps per minute for 3 minutes. Immediately after — measure your heart rate for 1 full minute.</div>
+      <div class="test-ref">Reference: under 80 BPM = excellent · 80-100 = good · over 100 = priority area</div>
+      <div class="test-inputs"><input type="number" id="t7_bpm" placeholder="Heart rate 1 min after the test (BPM, e.g. 88)" min="30" max="220"></div>
+    </div>
+
+    <div class="test-card">
+      <div class="test-header"><div class="test-num">8</div><div class="test-title">Sitting-Rising Test (SRT) — Functional Movement</div></div>
+      <div class="test-desc">Sit down on the floor and stand back up without using your hands, knees or elbows for support. Each touch costs one point. Maximum score is 10.</div>
+      <div class="test-ref">Validated in longevity research as a predictor of all-cause mortality.</div>
+      <div class="test-inputs">
+        <div class="options-list">
+          <label class="option-item"><input type="radio" name="t8_score" value="10 — no support at all"> 10 — sat and stood with no support at all</label>
+          <label class="option-item"><input type="radio" name="t8_score" value="7-9 — one or two touches"> 7-9 — one or two touches with hand or knee</label>
+          <label class="option-item"><input type="radio" name="t8_score" value="4-6 — several touches needed"> 4-6 — several touches needed</label>
+          <label class="option-item"><input type="radio" name="t8_score" value="1-3 — significant support"> 1-3 — significant support needed</label>
+          <label class="option-item"><input type="radio" name="t8_score" value="0 — could not perform"> 0 — could not perform without full assistance</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- NUTRITION -->
+  <div class="card">
+    <div class="card-title">Nutrition</div>
+    <div class="field">
+      <label>How would you describe your current eating pattern?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="n_pattern" value="Structured and intentional"> Structured and intentional — I follow a specific approach</label>
+        <label class="option-item"><input type="radio" name="n_pattern" value="Generally healthy but inconsistent"> Generally healthy but inconsistent</label>
+        <label class="option-item"><input type="radio" name="n_pattern" value="Convenience-driven"> Convenience-driven — I eat what is available</label>
+        <label class="option-item"><input type="radio" name="n_pattern" value="Actively trying to improve but struggling"> Actively trying to improve but struggling</label>
+        <label class="option-item"><input type="radio" name="n_pattern" value="Don't pay much attention"> I don't pay much attention to nutrition</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Which best describes your diet?</label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="radio" name="n_diet" value="Omnivore"> Omnivore — I eat everything</label>
+        <label class="option-item"><input type="radio" name="n_diet" value="Mediterranean-style"> Mediterranean-style</label>
+        <label class="option-item"><input type="radio" name="n_diet" value="Plant-based or vegetarian"> Plant-based / vegetarian</label>
+        <label class="option-item"><input type="radio" name="n_diet" value="Vegan"> Vegan</label>
+        <label class="option-item"><input type="radio" name="n_diet" value="Ketogenic or low-carb"> Ketogenic / low-carb</label>
+        <label class="option-item"><input type="radio" name="n_diet" value="Intermittent fasting"> Intermittent fasting</label>
+      </div>
+      <div style="margin-top:8px;"><input type="text" id="n_diet_other" placeholder="Other diet — describe here"></div>
+    </div>
+    <div class="field">
+      <label>Do you experience any of the following? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="n_symptoms" value="Energy crashes during the day"> Energy crashes</label>
+        <label class="option-item"><input type="checkbox" name="n_symptoms" value="Strong cravings for sugar or refined carbs"> Sugar / carb cravings</label>
+        <label class="option-item"><input type="checkbox" name="n_symptoms" value="Digestive discomfort after eating"> Digestive discomfort</label>
+        <label class="option-item"><input type="checkbox" name="n_symptoms" value="Difficulty maintaining healthy weight"> Difficulty with weight</label>
+        <label class="option-item"><input type="checkbox" name="n_symptoms" value="Emotional or stress eating"> Emotional / stress eating</label>
+        <label class="option-item"><input type="checkbox" name="n_symptoms" value="None of the above"> None of the above</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Estimated daily protein intake?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="n_protein" value="Don't track"> I don't track this</label>
+        <label class="option-item"><input type="radio" name="n_protein" value="Less than 60g"> Less than 60g</label>
+        <label class="option-item"><input type="radio" name="n_protein" value="60-100g"> 60-100g</label>
+        <label class="option-item"><input type="radio" name="n_protein" value="100-140g"> 100-140g</label>
+        <label class="option-item"><input type="radio" name="n_protein" value="More than 140g"> More than 140g</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- NUTRITION STATEMENTS -->
+  <div class="card">
+    <div class="card-title">Nutrition — TEMELI Statements</div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I eat primarily whole, minimally processed foods (vegetables, proteins, legumes, whole grains, fruit).</span><span class="slider-value" id="ns1-val">50</span></div><div class="slider-ends"><span>Mostly processed / packaged</span><span>Whole foods at every meal</span></div><input type="range" id="ns1" min="0" max="100" value="50" oninput="updateSlider('ns1')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My protein intake is sufficient — I eat a meaningful protein source at most meals.</span><span class="slider-value" id="ns2-val">50</span></div><div class="slider-ends"><span>Rarely adequate protein</span><span>Protein at every meal</span></div><input type="range" id="ns2" min="0" max="100" value="50" oninput="updateSlider('ns2')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I eat within a consistent daily window and do not eat in the 2-3 hours before sleep.</span><span class="slider-value" id="ns3-val">50</span></div><div class="slider-ends"><span>No window, eating late most nights</span><span>Consistent window, no late eating</span></div><input type="range" id="ns3" min="0" max="100" value="50" oninput="updateSlider('ns3')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My sugar and refined carbohydrate intake is low and intentional.</span><span class="slider-value" id="ns4-val">50</span></div><div class="slider-ends"><span>High sugar / refined carb daily</span><span>Minimal and intentional only</span></div><input type="range" id="ns4" min="0" max="100" value="50" oninput="updateSlider('ns4')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I am well hydrated — I drink at least 2 liters of water daily and rarely feel thirsty.</span><span class="slider-value" id="ns5-val">50</span></div><div class="slider-ends"><span>Chronically under-hydrated</span><span>Consistently hydrated</span></div><input type="range" id="ns5" min="0" max="100" value="50" oninput="updateSlider('ns5')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My relationship with food is neutral to positive — eating is not a source of guilt, anxiety, or compulsion.</span><span class="slider-value" id="ns6-val">50</span></div><div class="slider-ends"><span>Significant emotional difficulty</span><span>Neutral, relaxed relationship</span></div><input type="range" id="ns6" min="0" max="100" value="50" oninput="updateSlider('ns6')"></div>
+  </div>
+
+  <!-- MINDFULNESS -->
+  <div class="card">
+    <div class="card-title">Mindfulness</div>
+    <div class="field">
+      <label>Current stress level?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="mf_stress" value="Low"> Low — I feel generally calm and in control</label>
+        <label class="option-item"><input type="radio" name="mf_stress" value="Moderate"> Moderate — manageable but consistently present</label>
+        <label class="option-item"><input type="radio" name="mf_stress" value="High"> High — significantly affecting my daily life</label>
+        <label class="option-item"><input type="radio" name="mf_stress" value="Very high"> Very high — overwhelming</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Regular mindfulness or stress regulation practice? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="mf_practices" value="Meditation"> Meditation</label>
+        <label class="option-item"><input type="checkbox" name="mf_practices" value="Intentional breathwork"> Intentional breathwork</label>
+        <label class="option-item"><input type="checkbox" name="mf_practices" value="Journaling"> Journaling</label>
+        <label class="option-item"><input type="checkbox" name="mf_practices" value="Time in nature"> Time in nature</label>
+        <label class="option-item"><input type="checkbox" name="mf_practices" value="Prayer or spiritual practice"> Prayer / spiritual practice</label>
+        <label class="option-item"><input type="checkbox" name="mf_practices" value="Therapy or coaching"> Therapy / coaching</label>
+        <label class="option-item"><input type="checkbox" name="mf_practices" value="None currently"> None currently</label>
+      </div>
+      <div style="margin-top:8px;"><input type="text" id="mf_practices_other" placeholder="Other practices"></div>
+    </div>
+    <div class="field">
+      <label>How well do you recover emotionally from stressful events?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="mf_recovery" value="Quickly — within hours"> Quickly — I bounce back within hours</label>
+        <label class="option-item"><input type="radio" name="mf_recovery" value="Moderately — a day or two"> Moderately — takes a day or two</label>
+        <label class="option-item"><input type="radio" name="mf_recovery" value="Slowly — days or longer"> Slowly — stress lingers for days or longer</label>
+        <label class="option-item"><input type="radio" name="mf_recovery" value="Rarely fully recovered"> I rarely feel I have fully recovered</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- MINDFULNESS STATEMENTS -->
+  <div class="card">
+    <div class="card-title">Mindfulness — TEMELI Statements</div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I have a regular practice that creates deliberate mental stillness — meditation, prayer, focused breathing, or similar.</span><span class="slider-value" id="mfs1-val">50</span></div><div class="slider-ends"><span>No practice of any kind</span><span>Daily practice, 15+ min</span></div><input type="range" id="mfs1" min="0" max="100" value="50" oninput="updateSlider('mfs1')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I can recognize stress in my body as it happens, not only in retrospect.</span><span class="slider-value" id="mfs2-val">50</span></div><div class="slider-ends"><span>No real-time awareness</span><span>Consistent real-time awareness</span></div><input type="range" id="mfs2" min="0" max="100" value="50" oninput="updateSlider('mfs2')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My stress levels are manageable most of the time — acute stress does not dominate my days.</span><span class="slider-value" id="mfs3-val">50</span></div><div class="slider-ends"><span>High unmanaged stress daily</span><span>Stress is well-managed</span></div><input type="range" id="mfs3" min="0" max="100" value="50" oninput="updateSlider('mfs3')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I take genuine downtime — time that is not productive, scheduled, or digitally occupied.</span><span class="slider-value" id="mfs4-val">50</span></div><div class="slider-ends"><span>No real downtime</span><span>Regular, protected downtime</span></div><input type="range" id="mfs4" min="0" max="100" value="50" oninput="updateSlider('mfs4')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I feel connected to people I care about and have at least one relationship I find genuinely supportive.</span><span class="slider-value" id="mfs5-val">50</span></div><div class="slider-ends"><span>Isolated, no support</span><span>Strong connection and support</span></div><input type="range" id="mfs5" min="0" max="100" value="50" oninput="updateSlider('mfs5')"></div>
+  </div>
+
+  <!-- PREVENTION -->
+  <div class="card">
+    <div class="card-title">Prevention</div>
+    <div class="field">
+      <label>How recently have you had a comprehensive blood panel?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="pv_blood_panel" value="Within the last 6 months"> Within the last 6 months</label>
+        <label class="option-item"><input type="radio" name="pv_blood_panel" value="6-12 months ago"> 6-12 months ago</label>
+        <label class="option-item"><input type="radio" name="pv_blood_panel" value="1-2 years ago"> 1-2 years ago</label>
+        <label class="option-item"><input type="radio" name="pv_blood_panel" value="More than 2 years ago"> More than 2 years ago</label>
+        <label class="option-item"><input type="radio" name="pv_blood_panel" value="Never"> Never</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Do you currently take any supplements?</label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="pv_supplements" value="Yes" onchange="toggleConditional('pv_supp_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="pv_supplements" value="No" onchange="toggleConditional('pv_supp_cond', false)"> No</label>
+      </div>
+      <div class="conditional" id="pv_supp_cond"><textarea id="pv_supplements_list" rows="3" placeholder="Name and dose where possible (e.g. Vitamin D 3000 IU, Omega-3 2g)"></textarea></div>
+    </div>
+    <div class="field">
+      <label>Awareness of your personal health risks?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="pv_risk_awareness" value="High — actively monitor and manage"> High — I actively monitor and manage them</label>
+        <label class="option-item"><input type="radio" name="pv_risk_awareness" value="Moderate — aware but not actively managing"> Moderate — aware but not actively managing</label>
+        <label class="option-item"><input type="radio" name="pv_risk_awareness" value="Low — know little about specific risks"> Low — I know little about my specific risks</label>
+        <label class="option-item"><input type="radio" name="pv_risk_awareness" value="Prefer not to think about it"> I prefer not to think about it</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Regular check-ups with a physician?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="pv_checkups" value="Yes — annually or more often"> Yes — annually or more often</label>
+        <label class="option-item"><input type="radio" name="pv_checkups" value="Every 2-3 years"> Every 2-3 years</label>
+        <label class="option-item"><input type="radio" name="pv_checkups" value="Rarely — only when something is wrong"> Rarely — only when something is wrong</label>
+        <label class="option-item"><input type="radio" name="pv_checkups" value="No"> No</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREVENTION STATEMENTS -->
+  <div class="card">
+    <div class="card-title">Prevention — TEMELI Statements</div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I have a primary care physician and have had a comprehensive health review in the last 12 months.</span><span class="slider-value" id="pvs1-val">50</span></div><div class="slider-ends"><span>No physician, no review</span><span>Physician + full review last 12 months</span></div><input type="range" id="pvs1" min="0" max="100" value="50" oninput="updateSlider('pvs1')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I track at least one objective health marker regularly (blood pressure, HRV, weight, wearable data).</span><span class="slider-value" id="pvs2-val">50</span></div><div class="slider-ends"><span>Track nothing</span><span>Multiple markers tracked consistently</span></div><input type="range" id="pvs2" min="0" max="100" value="50" oninput="updateSlider('pvs2')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I do not smoke. If I have ever smoked, I have been smoke-free for over 5 years.</span><span class="slider-value" id="pvs3-val">50</span></div><div class="slider-ends"><span>Current daily smoker</span><span>Never smoked / 5+ years smoke-free</span></div><input type="range" id="pvs3" min="0" max="100" value="50" oninput="updateSlider('pvs3')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">My alcohol consumption is low — fewer than 7 standard drinks per week, no binge episodes.</span><span class="slider-value" id="pvs4-val">50</span></div><div class="slider-ends"><span>14+ drinks/week or regular bingeing</span><span>Under 7/week, no bingeing</span></div><input type="range" id="pvs4" min="0" max="100" value="50" oninput="updateSlider('pvs4')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I proactively manage my sun exposure, use sunscreen, and have had a skin check in the last 2 years.</span><span class="slider-value" id="pvs5-val">50</span></div><div class="slider-ends"><span>No sun protection, no check</span><span>Consistent protection and recent check</span></div><input type="range" id="pvs5" min="0" max="100" value="50" oninput="updateSlider('pvs5')"></div>
+    <div class="slider-field"><div class="slider-label-row"><span class="slider-q">I engage with health information critically — I do not act on trends without evaluating the evidence.</span><span class="slider-value" id="pvs6-val">50</span></div><div class="slider-ends"><span>Act on health trends uncritically</span><span>Always evaluate before acting</span></div><input type="range" id="pvs6" min="0" max="100" value="50" oninput="updateSlider('pvs6')"></div>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo(2)">← Back</button>
+    <button class="btn btn-primary" onclick="goNext(3)">Continue — Your Real Life →</button>
+  </div>
+</div><!-- end section-3 -->
+<!-- SECTION 4 -->
+<div class="section-page" id="section-4">
+  <div class="section-hero">
+    <div class="section-label">Section 4 of 8</div>
+    <div class="section-title">Your Real Life</div>
+    <div class="section-desc">The best protocol is the one you will actually follow. An accurate picture of your constraints is more valuable than an optimistic one.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Time</div>
+    <div class="field">
+      <label>Hours per week you can realistically dedicate to your health — exercise, preparation, appointments and learning combined?</label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="radio" name="rl_hours" value="Less than 2 hours"> Less than 2 hours</label>
+        <label class="option-item"><input type="radio" name="rl_hours" value="2-4 hours"> 2-4 hours</label>
+        <label class="option-item"><input type="radio" name="rl_hours" value="4-7 hours"> 4-7 hours</label>
+        <label class="option-item"><input type="radio" name="rl_hours" value="7-10 hours"> 7-10 hours</label>
+        <label class="option-item"><input type="radio" name="rl_hours" value="More than 10 hours"> More than 10 hours</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>What does your typical weekday look like?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="rl_schedule" value="Mostly fixed schedule"> Mostly fixed schedule — predictable start and end times</label>
+        <label class="option-item"><input type="radio" name="rl_schedule" value="Mixed — some structure, some flexibility"> Mixed — some structure, some flexibility</label>
+        <label class="option-item"><input type="radio" name="rl_schedule" value="Highly variable"> Highly variable — no two days are the same</label>
+        <label class="option-item"><input type="radio" name="rl_schedule" value="Shifts or non-standard hours"> I work shifts or non-standard hours</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Do you travel frequently?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="rl_travel" value="Yes — more than 10 days per month"> Yes — more than 10 days per month</label>
+        <label class="option-item"><input type="radio" name="rl_travel" value="Occasionally — 3-10 days per month"> Occasionally — 3-10 days per month</label>
+        <label class="option-item"><input type="radio" name="rl_travel" value="Rarely — less than 3 days per month"> Rarely — less than 3 days per month</label>
+        <label class="option-item"><input type="radio" name="rl_travel" value="Almost never"> Almost never</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>When do you have the most energy and focus during the day?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="rl_peak_energy" value="Early morning — before 8am"> Early morning — before 8am</label>
+        <label class="option-item"><input type="radio" name="rl_peak_energy" value="Morning — 8am to 12pm"> Morning — 8am to 12pm</label>
+        <label class="option-item"><input type="radio" name="rl_peak_energy" value="Afternoon — 12pm to 5pm"> Afternoon — 12pm to 5pm</label>
+        <label class="option-item"><input type="radio" name="rl_peak_energy" value="Evening — after 5pm"> Evening — after 5pm</label>
+        <label class="option-item"><input type="radio" name="rl_peak_energy" value="Varies too much to say"> Varies too much to say</label>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Resources</div>
+    <div class="field">
+      <label>Approximate monthly budget for health — supplements, testing, coaching, equipment and facilities combined?</label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="rl_budget" value="Less than $50"> Less than $50</label>
+        <label class="option-item"><input type="radio" name="rl_budget" value="$50-150"> $50-150</label>
+        <label class="option-item"><input type="radio" name="rl_budget" value="$150-300"> $150-300</label>
+        <label class="option-item"><input type="radio" name="rl_budget" value="$300-500"> $300-500</label>
+        <label class="option-item"><input type="radio" name="rl_budget" value="More than $500"> More than $500</label>
+        <label class="option-item"><input type="radio" name="rl_budget" value="Haven't thought about this"> I haven't thought about this yet</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Which of the following do you currently have access to? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="rl_resources" value="Gym or fitness facility"> Gym / fitness facility</label>
+        <label class="option-item"><input type="checkbox" name="rl_resources" value="Personal trainer or coach"> Personal trainer / coach</label>
+        <label class="option-item"><input type="checkbox" name="rl_resources" value="Functional / integrative physician"> Functional medicine physician</label>
+        <label class="option-item"><input type="checkbox" name="rl_resources" value="Dietitian or nutritionist"> Registered dietitian</label>
+        <label class="option-item"><input type="checkbox" name="rl_resources" value="Therapist or psychologist"> Therapist / psychologist</label>
+        <label class="option-item"><input type="checkbox" name="rl_resources" value="None of the above"> None of the above</label>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Environment &amp; Support</div>
+    <div class="field">
+      <label>Describe your physical environment and access to health resources</label>
+      <div class="field-hint">Gym, outdoor space, cooking facilities, urban or rural — anything that shapes what is realistic.</div>
+      <textarea id="rl_environment" rows="3" placeholder="e.g. I have a gym 5 min from home but no outdoor green space. I cook at home most days."></textarea>
+    </div>
+    <div class="field">
+      <label>What do you already do consistently that you believe is serving your health? <span class="optional-badge">habits maintained 6+ months</span></label>
+      <textarea id="rl_habits" rows="3" placeholder="Be specific — what, how often, and how long have you been doing it?"></textarea>
+    </div>
+    <div class="field">
+      <label>Is there someone in your life for whom your health directly matters? <span class="optional-badge">optional</span></label>
+      <div class="field-hint">A partner, child, parent, or close friend. Naming them affects the protocol — it is not about obligation, it is about motivation.</div>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="rl_support" value="Yes" onchange="toggleConditional('rl_support_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="rl_support" value="Not applicable" onchange="toggleConditional('rl_support_cond', false)"> Not applicable</label>
+      </div>
+      <div class="conditional" id="rl_support_cond"><textarea id="rl_support_detail" rows="2" placeholder="Who is this person and why does your health matter to them specifically?"></textarea></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">What Has and Hasn't Worked</div>
+    <div class="field">
+      <label>What have you tried that worked well — and why do you think it worked?</label>
+      <textarea id="rl_worked" rows="3" placeholder="Be specific — what did you do, for how long, and what changed?"></textarea>
+    </div>
+    <div class="field">
+      <label>What have you tried that didn't work — and what got in the way?</label>
+      <textarea id="rl_not_worked" rows="3" placeholder="Honest answers here are more valuable than positive ones."></textarea>
+    </div>
+    <div class="field">
+      <label>The single biggest obstacle between you and better health right now?</label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="radio" name="rl_obstacle" value="Time"> Time</label>
+        <label class="option-item"><input type="radio" name="rl_obstacle" value="Motivation and consistency"> Motivation / consistency</label>
+        <label class="option-item"><input type="radio" name="rl_obstacle" value="Knowledge — don't know what to do"> Knowledge</label>
+        <label class="option-item"><input type="radio" name="rl_obstacle" value="Conflicting information"> Conflicting information</label>
+        <label class="option-item"><input type="radio" name="rl_obstacle" value="Cost"> Cost</label>
+        <label class="option-item"><input type="radio" name="rl_obstacle" value="Physical limitation or pain"> Physical limitation / pain</label>
+        <label class="option-item"><input type="radio" name="rl_obstacle" value="Stress or mental load"> Stress / mental load</label>
+        <label class="option-item"><input type="radio" name="rl_obstacle" value="Lack of support"> Lack of support</label>
+      </div>
+      <div style="margin-top:8px;"><input type="text" id="rl_obstacle_other" placeholder="Other — describe here"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Readiness</div>
+    <div class="field">
+      <div class="slider-field">
+        <div class="slider-label-row"><span class="slider-q" style="font-size:14px;">How ready are you to make changes to your daily routine right now?</span><span class="slider-value" id="rl_readiness-val">5</span></div>
+        <div class="slider-ends"><span>1 — not ready at all</span><span>10 — ready to change everything</span></div>
+        <input type="range" id="rl_readiness" min="1" max="10" value="5" oninput="updateSlider('rl_readiness')">
+      </div>
+    </div>
+    <div class="field">
+      <label>What would need to be true for this program to feel worth it to you at the end of 5 months?</label>
+      <div class="field-hint">Your answer here becomes part of how we measure success for you specifically.</div>
+      <textarea id="rl_success" rows="3" placeholder="Be as specific as you can."></textarea>
+    </div>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo(3)">← Back</button>
+    <button class="btn btn-primary" onclick="goNext(4)">Continue — Your Existing Data →</button>
+  </div>
+</div><!-- end section-4 -->
+<!-- SECTION 5 -->
+<div class="section-page" id="section-5">
+  <div class="section-hero">
+    <div class="section-label">Section 5 of 8</div>
+    <div class="section-title">Your Existing Data</div>
+    <div class="section-desc">Entirely optional. Every piece you share makes your Longevity Intelligence Map more precise. Even partial or older results are useful.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Blood Work</div>
+    <div class="field">
+      <label>Blood test results from the last 24 months?</label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="ed_blood" value="Yes" onchange="toggleConditional('ed_blood_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="ed_blood" value="No" onchange="toggleConditional('ed_blood_cond', false)"> No</label>
+      </div>
+      <div class="conditional" id="ed_blood_cond">
+        <div class="field" style="margin-top:10px;">
+          <label>How recent are your most recent results?</label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="ed_blood_recency" value="Within the last 6 months"> Within the last 6 months</label>
+            <label class="option-item"><input type="radio" name="ed_blood_recency" value="6-12 months ago"> 6-12 months ago</label>
+            <label class="option-item"><input type="radio" name="ed_blood_recency" value="12-24 months ago"> 12-24 months ago</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Which markers do you have? <span class="optional-badge">select all that apply</span></label>
+          <div class="options-list two-col">
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Glucose / HbA1c"> Glucose / HbA1c</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Full lipid panel"> Full lipid panel</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="ApoB"> ApoB</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Lp(a)"> Lp(a)</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="hs-CRP"> hs-CRP (inflammation)</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Homocysteine"> Homocysteine</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Vitamin D"> Vitamin D (25-OH-D)</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Ferritin / iron"> Ferritin / iron panel</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Full thyroid panel"> Full thyroid panel</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Hormones"> Hormones (T, E2, DHEA-S)</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Liver function"> Liver function (ALT, AST)</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="Kidney function"> Kidney function (eGFR)</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="NAD+ / icNAD+"> NAD+ / icNAD+</label>
+            <label class="option-item"><input type="checkbox" name="ed_blood_markers" value="CBC"> CBC (complete blood count)</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Key values you know <span class="optional-badge">optional</span></label>
+          <textarea id="ed_blood_values" rows="4" placeholder="e.g. Vitamin D: 38 ng/mL · HbA1c: 5.4% · LDL: 112 mg/dL&#10;&#10;If you have a PDF of results, please send it directly to doych@doychzone.com with your name in the subject line."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">NAD+ Testing</div>
+    <div class="field">
+      <label>Have you ever tested your NAD+ levels?</label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="ed_nad" value="Yes" onchange="toggleConditional('ed_nad_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="ed_nad" value="No" onchange="toggleConditional('ed_nad_cond', false)"> No</label>
+      </div>
+      <div class="conditional" id="ed_nad_cond">
+        <div class="field" style="margin-top:10px;">
+          <label>Which test did you use?</label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="ed_nad_test" value="Jinfiniti icNAD+"> Jinfiniti intracellular NAD+ (icNAD+) test</label>
+            <label class="option-item"><input type="radio" name="ed_nad_test" value="Jinfiniti AgingSOS"> Jinfiniti AgingSOS panel</label>
+            <label class="option-item"><input type="radio" name="ed_nad_test" value="Other lab"> Other lab or provider</label>
+          </div>
+        </div>
+        <div class="field-grid-2">
+          <div class="field"><label>Your result (µM)</label><input type="number" id="ed_nad_result" placeholder="e.g. 29.4" step="0.1"></div>
+          <div class="field"><label>Date of test</label><input type="date" id="ed_nad_date"></div>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Are you currently taking any NAD+ precursor supplements?</label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="ed_nad_precursor" value="Yes" onchange="toggleConditional('ed_nad_prec_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="ed_nad_precursor" value="No" onchange="toggleConditional('ed_nad_prec_cond', false)"> No</label>
+      </div>
+      <div class="conditional" id="ed_nad_prec_cond">
+        <div class="field" style="margin-top:10px;">
+          <div class="options-list two-col" style="margin-bottom:8px;">
+            <label class="option-item"><input type="radio" name="ed_nad_prec_type" value="NMN"> NMN</label>
+            <label class="option-item"><input type="radio" name="ed_nad_prec_type" value="NR (Nicotinamide Riboside)"> NR (Nicotinamide Riboside)</label>
+            <label class="option-item"><input type="radio" name="ed_nad_prec_type" value="Niacin"> Niacin</label>
+            <label class="option-item"><input type="radio" name="ed_nad_prec_type" value="Other"> Other</label>
+          </div>
+          <input type="text" id="ed_nad_precursor_details" placeholder="Product name and daily dose (mg)">
+        </div>
+        <div class="field">
+          <label>How long have you been taking it?</label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="ed_nad_duration" value="Less than 1 month"> Less than 1 month</label>
+            <label class="option-item"><input type="radio" name="ed_nad_duration" value="1-3 months"> 1-3 months</label>
+            <label class="option-item"><input type="radio" name="ed_nad_duration" value="3-6 months"> 3-6 months</label>
+            <label class="option-item"><input type="radio" name="ed_nad_duration" value="More than 6 months"> More than 6 months</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">DNA &amp; Genetic Testing</div>
+    <div class="field">
+      <label>Have you done any genetic or DNA testing?</label>
+      <div class="options-list" style="flex-direction:row;gap:8px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="ed_dna" value="Yes" onchange="toggleConditional('ed_dna_cond', true)"> Yes</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="ed_dna" value="No" onchange="toggleConditional('ed_dna_cond', false)"> No</label>
+      </div>
+      <div class="conditional" id="ed_dna_cond">
+        <div class="field" style="margin-top:10px;">
+          <div class="options-list two-col">
+            <label class="option-item"><input type="checkbox" name="ed_dna_platform" value="23andMe"> 23andMe</label>
+            <label class="option-item"><input type="checkbox" name="ed_dna_platform" value="AncestryDNA"> AncestryDNA</label>
+            <label class="option-item"><input type="checkbox" name="ed_dna_platform" value="FitnessGenes"> FitnessGenes</label>
+            <label class="option-item"><input type="checkbox" name="ed_dna_platform" value="AgeMaster"> AgeMaster</label>
+            <label class="option-item"><input type="checkbox" name="ed_dna_platform" value="Dante Labs"> Dante Labs</label>
+          </div>
+          <div style="margin-top:8px;"><input type="text" id="ed_dna_other" placeholder="Other platform"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Functional &amp; Fitness Testing</div>
+    <div class="field">
+      <label>Professional tests you've had done? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="ed_functional" value="VO2max test"> VO₂max test</label>
+        <label class="option-item"><input type="checkbox" name="ed_functional" value="DEXA body composition"> DEXA body composition</label>
+        <label class="option-item"><input type="checkbox" name="ed_functional" value="Bone density scan"> Bone density scan</label>
+        <label class="option-item"><input type="checkbox" name="ed_functional" value="Grip strength measurement"> Grip strength measurement</label>
+        <label class="option-item"><input type="checkbox" name="ed_functional" value="Coronary calcium score"> Coronary calcium score</label>
+        <label class="option-item"><input type="checkbox" name="ed_functional" value="Cognitive performance assessment"> Cognitive assessment</label>
+        <label class="option-item"><input type="checkbox" name="ed_functional" value="None of the above"> None of the above</label>
+      </div>
+      <div style="margin-top:8px;"><textarea id="ed_functional_results" rows="2" placeholder="Share any results you remember (e.g. VO2max: 38 ml/kg/min · DEXA body fat: 24%)"></textarea></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Wearable Devices</div>
+    <div class="field">
+      <label>Current wearable health tracking devices? <span class="optional-badge">select all that apply</span></label>
+      <div class="options-list two-col">
+        <label class="option-item"><input type="checkbox" name="ed_wearables" value="Apple Watch"> Apple Watch</label>
+        <label class="option-item"><input type="checkbox" name="ed_wearables" value="Oura Ring"> Oura Ring</label>
+        <label class="option-item"><input type="checkbox" name="ed_wearables" value="WHOOP"> WHOOP</label>
+        <label class="option-item"><input type="checkbox" name="ed_wearables" value="Garmin"> Garmin</label>
+        <label class="option-item"><input type="checkbox" name="ed_wearables" value="Fitbit"> Fitbit</label>
+        <label class="option-item"><input type="checkbox" name="ed_wearables" value="CGM"> CGM (continuous glucose)</label>
+        <label class="option-item"><input type="checkbox" name="ed_wearables" value="None"> None</label>
+      </div>
+      <div style="margin-top:8px;"><input type="text" id="ed_wearables_other" placeholder="Other devices"></div>
+    </div>
+    <div class="field-grid-2">
+      <div class="field"><label>Average HRV — last 30 days (ms) <span class="optional-badge">if available</span></label><input type="number" id="ed_hrv" placeholder="e.g. 42" min="0" max="200"></div>
+      <div class="field"><label>Average resting heart rate (BPM) <span class="optional-badge">if available</span></label><input type="number" id="ed_rhr" placeholder="e.g. 62" min="30" max="120"></div>
+    </div>
+    <div class="field"><label>Average sleep duration — last 30 days (hrs) <span class="optional-badge">if available</span></label><input type="number" id="ed_sleep_avg" placeholder="e.g. 6.8" min="0" max="12" step="0.1"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Body Composition</div>
+    <div class="field-grid-2">
+      <div class="field"><label>Current weight (kg) <span class="optional-badge">optional</span></label><input type="number" id="ed_weight" placeholder="e.g. 74" min="30" max="300"></div>
+      <div class="field"><label>Height (cm) <span class="optional-badge">optional</span></label><input type="number" id="ed_height" placeholder="e.g. 172" min="100" max="250"></div>
+    </div>
+    <div class="field-grid-2">
+      <div class="field"><label>Body fat % <span class="optional-badge">if known</span></label><input type="number" id="ed_bodyfat" placeholder="e.g. 22" min="3" max="60" step="0.1"></div>
+      <div class="field"><label>Waist circumference (cm) <span class="optional-badge">if known</span></label><input type="number" id="ed_waist" placeholder="e.g. 86" min="40" max="200"></div>
+    </div>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo(4)">← Back</button>
+    <button class="btn btn-primary" onclick="goNext(5)">Continue — Your Goals →</button>
+  </div>
+</div><!-- end section-5 -->
+<!-- SECTION 6 -->
+<div class="section-page" id="section-6">
+  <div class="section-hero">
+    <div class="section-label">Section 6 of 8</div>
+    <div class="section-title">Your Goals and Priorities</div>
+    <div class="section-desc">What specific changes would this program need to bring to make you feel truly accomplished?</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Where You Want to Go</div>
+    <div class="field">
+      <label>What would need to be visibly different in your life 12 months from now for this program to have been worth it? <span class="required-star">*</span></label>
+      <div class="field-hint">Not 'I want to be healthier' — what would you see, feel or be able to do differently?</div>
+      <textarea id="g_vision" rows="4" placeholder="Your 12-month vision" required></textarea>
+    </div>
+    <div class="field">
+      <label>Primary motivation for joining? <span class="required-star">*</span></label>
+      <div class="options-list">
+        <label class="option-item"><input type="radio" name="g_motivation" value="Understand my biology"> I want to understand my biology and what's actually happening inside</label>
+        <label class="option-item"><input type="radio" name="g_motivation" value="Reverse or slow aging signs"> I want to reverse or slow down signs of aging I'm already noticing</label>
+        <label class="option-item"><input type="radio" name="g_motivation" value="Optimize performance"> I want to optimize performance — energy, focus, physical capacity</label>
+        <label class="option-item"><input type="radio" name="g_motivation" value="Prevent disease and extend healthspan"> I want to prevent disease and extend my healthy years</label>
+        <label class="option-item"><input type="radio" name="g_motivation" value="Health wake-up call"> I've had a health wake-up call and I want to act on it</label>
+        <label class="option-item"><input type="radio" name="g_motivation" value="Already healthy — want to stay that way"> I'm already healthy and want to stay that way as long as possible</label>
+      </div>
+      <div style="margin-top:8px;"><input type="text" id="g_motivation_other" placeholder="Other motivation — describe here"></div>
+    </div>
+    <div class="field">
+      <label>Top three health and longevity priorities right now? <span class="optional-badge">select up to 3</span></label>
+      <div class="priority-note" id="priority-count-msg"></div>
+      <div class="options-list two-col" id="priority-list">
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Energy and vitality"> Energy and vitality</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Sleep quality"> Sleep quality</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Body composition"> Body composition</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Cardiovascular health"> Cardiovascular health</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Bone and joint health"> Bone and joint health</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Cognitive performance"> Cognitive performance</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Hormonal balance"> Hormonal balance</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Metabolic health"> Metabolic health</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Stress resilience"> Stress resilience</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Longevity and disease prevention"> Longevity / disease prevention</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Physical performance and fitness"> Physical performance</label>
+        <label class="option-item"><input type="checkbox" name="g_priorities" value="Gut health"> Gut health</label>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Where You Are Not Willing to Go</div>
+    <div class="field">
+      <label>What is completely off the table — in terms of time, cost, effort or lifestyle change?</label>
+      <textarea id="g_off_table" rows="3" placeholder="Honesty here saves us both time. There are no wrong answers."></textarea>
+    </div>
+    <div class="field">
+      <label>Is there anything about your current lifestyle that you are not willing to change, regardless of what the data shows?</label>
+      <textarea id="g_unwilling" rows="2" placeholder="Important context for building a realistic plan."></textarea>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Your Definition of Success</div>
+    <div class="field">
+      <label>How do you personally define optimal health?</label>
+      <textarea id="g_health_definition" rows="3" placeholder="Not the textbook definition — yours."></textarea>
+    </div>
+    <div class="field">
+      <label>What does a good day look like for you — physically, mentally and emotionally?</label>
+      <textarea id="g_good_day" rows="3" placeholder="Walk us through it if you like."></textarea>
+    </div>
+    <div class="field">
+      <label>If you could change one thing about how you feel day-to-day starting tomorrow, what would it be?</label>
+      <textarea id="g_one_change" rows="2" placeholder="One thing. The most important one."></textarea>
+    </div>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo(5)">← Back</button>
+    <button class="btn btn-primary" onclick="goNext(6)">Continue — Self-Perception →</button>
+  </div>
+</div><!-- end section-6 -->
+
+<!-- SECTION 7 -->
+<div class="section-page" id="section-7">
+  <div class="section-hero">
+    <div class="section-label">Section 7 of 8</div>
+    <div class="section-title">Self-Perception Baseline</div>
+    <div class="section-desc">These three questions require an honest answer, not a flattering one. They form the self-perception baseline for your Longevity Intelligence Map — and they are among the most revealing data points in the entire questionnaire.</div>
+  </div>
+  <div class="card">
+    <div class="field">
+      <div class="slider-field">
+        <div class="slider-label-row"><span class="slider-q" style="font-size:15px;font-weight:500;">On a scale of 0 to 100, how would you rate your overall current health? <span class="required-star">*</span></span><span class="slider-value" id="sp_health_rating-val" style="font-size:18px;">50</span></div>
+        <div class="slider-ends"><span>0 = critically unwell</span><span>100 = peak human function</span></div>
+        <input type="range" id="sp_health_rating" min="0" max="100" value="50" oninput="updateSlider('sp_health_rating')">
+      </div>
+    </div>
+    <hr class="section-divider">
+    <div class="field">
+      <label>How old do you feel? <span class="required-star">*</span></label>
+      <div class="field-hint">Your functional self-perception — not your chronological age.</div>
+      <input type="number" id="sp_felt_age" placeholder="e.g. 42" min="15" max="100" required>
+    </div>
+    <div class="field">
+      <label>What is your biggest perceived health risk right now? <span class="required-star">*</span></label>
+      <div class="field-hint">What actually concerns you most when you think honestly about your health trajectory?</div>
+      <textarea id="sp_biggest_risk" rows="3" placeholder="Be honest with yourself." required></textarea>
+    </div>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="goTo(6)">← Back</button>
+    <button class="btn btn-primary" onclick="goNext(7)">Continue — Consent &amp; Agreements →</button>
+  </div>
+</div><!-- end section-7 -->
+
+<!-- SECTION 8 -->
+<div class="section-page" id="section-8">
+  <div class="section-hero">
+    <div class="section-label">Section 8 of 8</div>
+    <div class="section-title">Consent and Agreements</div>
+    <div class="section-desc">Please read each item carefully and confirm your agreement. Your participation depends on all five consents below.</div>
+  </div>
+  <div class="card">
+    <div class="consent-item">
+      <div class="consent-text">Your health data — including answers to this questionnaire and information shared during the program — will be stored securely and used solely for building your Longevity Intelligence Map and supporting your coaching relationship. Your data will not be sold or shared with third parties for commercial purposes. Data is processed in accordance with GDPR. You have the right to access, correct or request deletion at any time by contacting doych@doychzone.com.</div>
+      <label class="consent-check"><input type="checkbox" id="c1" required> <span>I have read and understood the data processing terms and I consent to my health data being processed for the purposes of this program. <span class="required-star">*</span></span></label>
+    </div>
+    <div class="consent-item">
+      <div class="consent-text">Your Longevity Intelligence Map and supporting documents are generated with the assistance of AI tools, including Anthropic's Claude, used by the program practitioner as a documentation and analysis aid. All AI-generated content is reviewed, edited and approved by Doychin Karshovski before delivery. At no point does an AI system make health decisions independently or without human oversight.</div>
+      <label class="consent-check"><input type="checkbox" id="c2" required> <span>I understand and consent to the use of AI-assisted documentation tools in the preparation of my program materials. <span class="required-star">*</span></span></label>
+    </div>
+    <div class="consent-item">
+      <div class="consent-text">This program contributes to an ongoing scientific study on longevity across five age groups. Participation in the research component is voluntary and separate from your individual program experience. If you opt in, your anonymized data may be used in aggregate analysis and potentially in academic publications. Opting out does not affect your participation or the quality of your Map in any way.</div>
+      <div class="options-list" style="flex-direction:row;gap:8px;margin-top:4px;">
+        <label class="option-item" style="flex:1;"><input type="radio" name="c3" value="Yes — consent to research"> Yes — I consent to anonymized research use</label>
+        <label class="option-item" style="flex:1;"><input type="radio" name="c3" value="No — program only"> No — program only</label>
+      </div>
+    </div>
+    <div class="consent-item">
+      <div class="consent-text">All program communication, group sessions, webinars, and community interaction will take place within a private Circle community created exclusively for this program. By joining the program you agree to receive program-related communications through this platform.</div>
+      <label class="consent-check"><input type="checkbox" id="c4" required> <span>I understand that program communication will take place via a private Circle community and I agree to join and participate through that platform. <span class="required-star">*</span></span></label>
+    </div>
+    <div class="consent-item">
+      <div class="consent-text">This program is a longevity coaching and optimization program, not a medical service. Nothing in your Longevity Intelligence Map or in any program communication constitutes medical advice, diagnosis or treatment. If you have any medical concerns, please consult a qualified physician. Items flagged with ⚕ in your Map require physician review before action.</div>
+      <label class="consent-check"><input type="checkbox" id="c5" required> <span>I understand that this is a coaching and optimization program and not a medical service, and that I will consult a physician for any medical concerns. <span class="required-star">*</span></span></label>
+    </div>
+    <hr class="section-divider">
+    <div class="field">
+      <label>Full name — as confirmation of the above agreements <span class="required-star">*</span></label>
+      <div class="field-hint">Type your full name as a digital signature.</div>
+      <input type="text" id="c_signature" placeholder="Your full legal name" required>
+    </div>
+    <div class="field">
+      <label>Date <span class="required-star">*</span></label>
+      <input type="date" id="c_date" required>
+    </div>
+  </div>
+  <div class="nav-buttons"><button class="btn btn-secondary" onclick="goTo(7)">← Back</button></div>
+  <div class="submit-section">
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6;">Thank you for your time, your effort, and your trust.<br>You will receive a confirmation email within minutes.</p>
+    <button class="btn btn-submit" id="submit-btn" onclick="submitForm()">Submit Your Intake →</button>
+    <div class="error-msg" id="error-msg">Something went wrong. Please try again or email your responses directly to <strong>doych@doychzone.com</strong>.</div>
+  </div>
+</div><!-- end section-8 -->
+
+</div><!-- end main-form -->
+
+<!-- SUCCESS -->
+<div id="success-screen">
+  <div class="success-icon">
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="14" fill="#1D9E75" opacity="0.15"/><path d="M8 14l4 4 8-8" stroke="#1D9E75" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="success-title">Your intake is complete.</div>
+  <div class="success-text">
+    Thank you. Your Longevity Intelligence Map starts here.<br><br>
+    You will receive a confirmation email at the address you provided within a few minutes.<br><br>
+    Access to the Circle community will follow within 24 hours.<br><br>
+    If you have results files to share — blood work, NAD+ results, DNA data — please send them directly to <strong>doych@doychzone.com</strong> with your name in the subject line.
+  </div>
+</div>
+</div><!-- end form-wrap -->
+<script>
+// ── NAVIGATION ──────────────────────────────────────────
+let currentSection = 1;
+const totalSections = 8;
+
+function updateProgress(n) {
+  const pct = Math.round((n / totalSections) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = 'Section ' + n + ' of ' + totalSections;
+  document.getElementById('progress-pct').textContent = pct + '%';
+}
+
+function goTo(n) {
+  document.getElementById('section-' + currentSection).classList.remove('active');
+  currentSection = n;
+  document.getElementById('section-' + n).classList.add('active');
+  updateProgress(n);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goNext(current) {
+  if (!validateSection(current)) return;
+  goTo(current + 1);
+}
+
+// ── VALIDATION ───────────────────────────────────────────
+function validateSection(n) {
+  let valid = true;
+  const markInvalid = (el) => { if (el) el.classList.add('invalid'); valid = false; };
+  const markValid = (el) => { if (el) el.classList.remove('invalid'); };
+
+  if (n === 1) {
+    ['s1_name','s1_dob','s1_city','s1_country','s1_nationality','s1_email','s1_why'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) markInvalid(el); else markValid(el);
+    });
+    const edu = document.getElementById('s1_education');
+    if (!edu || !edu.value) markInvalid(edu); else markValid(edu);
+    if (!document.querySelector('[name="s1_gender"]:checked')) valid = false;
+    if (!document.querySelector('[name="s1_english"]:checked')) valid = false;
+    if (!document.querySelector('[name="s1_familiarity"]:checked')) valid = false;
+  }
+
+  if (n === 2) {
+    if (!document.querySelector('[name="s2_meds"]:checked')) valid = false;
+    if (!document.querySelector('[name="s2_surgeries"]:checked')) valid = false;
+  }
+
+  if (n === 6) {
+    const v = document.getElementById('g_vision');
+    if (!v || !v.value.trim()) markInvalid(v); else markValid(v);
+    if (!document.querySelector('[name="g_motivation"]:checked') && !document.getElementById('g_motivation_other').value.trim()) valid = false;
+  }
+
+  if (n === 7) {
+    const fa = document.getElementById('sp_felt_age');
+    const br = document.getElementById('sp_biggest_risk');
+    if (!fa || !fa.value) markInvalid(fa); else markValid(fa);
+    if (!br || !br.value.trim()) markInvalid(br); else markValid(br);
+  }
+
+  if (!valid) {
+    setTimeout(() => {
+      const first = document.querySelector('#section-' + n + ' .invalid');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  }
+  return valid;
+}
+
+// ── SLIDERS ──────────────────────────────────────────────
+function updateSlider(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  document.getElementById(id + '-val').textContent = el.value;
+  const pct = (el.value - el.min) / (el.max - el.min) * 100;
+  el.style.background = 'linear-gradient(to right, #1D9E75 ' + pct + '%, #D1E0D9 ' + pct + '%)';
+}
+
+// Init all sliders on load
+document.querySelectorAll('input[type="range"]').forEach(el => {
+  const pct = (el.value - el.min) / (el.max - el.min) * 100;
+  el.style.background = 'linear-gradient(to right, #1D9E75 ' + pct + '%, #D1E0D9 ' + pct + '%)';
+});
+
+// ── CONDITIONALS ─────────────────────────────────────────
+function toggleConditional(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('visible', show);
+}
+
+// ── PRIORITY LIMIT (max 3) ────────────────────────────────
+document.querySelectorAll('[name="g_priorities"]').forEach(cb => {
+  cb.addEventListener('change', function() {
+    const checked = document.querySelectorAll('[name="g_priorities"]:checked');
+    const msg = document.getElementById('priority-count-msg');
+    if (checked.length >= 3) {
+      document.querySelectorAll('[name="g_priorities"]:not(:checked)').forEach(c => c.disabled = true);
+      if (msg) msg.textContent = '3 selected — maximum reached.';
+    } else {
+      document.querySelectorAll('[name="g_priorities"]').forEach(c => c.disabled = false);
+      if (msg) msg.textContent = checked.length > 0 ? checked.length + ' selected (up to 3).' : '';
+    }
+  });
+});
+
+// Set today's date on consent date field
+(function() {
+  const d = document.getElementById('c_date');
+  if (d) { const t = new Date(); d.value = t.toISOString().split('T')[0]; }
+})();
+
+// ── DATA COLLECTION ───────────────────────────────────────
+function collectData() {
+  const d = {};
+
+  // All text / email / tel / number inputs by id
+  const textIds = [
+    's1_name','s1_dob','s1_city','s1_country','s1_nationality','s1_occupation',
+    's1_email','s1_phone','s1_why','s2_conditions_other','s2_meds_list',
+    's2_surgeries_detail','s2_allergies_list','s2_other_notes','mv_types_other',
+    'mv_limitations_detail','n_diet_other','mf_practices_other','pv_supplements_list',
+    'rl_environment','rl_habits','rl_support_detail','rl_worked','rl_not_worked',
+    'rl_obstacle_other','rl_success','ed_blood_values','ed_nad_precursor_details',
+    'ed_dna_other','ed_functional_results','ed_wearables_other','g_vision',
+    'g_motivation_other','g_off_table','g_unwilling','g_health_definition',
+    'g_good_day','g_one_change','sp_biggest_risk','c_signature',
+    't1_reps','t2_left','t2_right','t4_time','t5_left','t5_right',
+    't6_cm','t7_bpm','ed_nad_result','ed_hrv','ed_rhr','ed_sleep_avg',
+    'ed_weight','ed_height','ed_bodyfat','ed_waist','sp_felt_age',
+    'ed_nad_date','c_date','s1_education'
+  ];
+
+  textIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) d[id] = el.value;
+  });
+
+  // Sliders
+  const sliderIds = [
+    'b1','b2','b3','b4','b5',
+    'sl1','sl2','sl3','sl4','sl5','sl6',
+    'ms1','ms2','ms3','ms4','ms5','ms6',
+    'ns1','ns2','ns3','ns4','ns5','ns6',
+    'mfs1','mfs2','mfs3','mfs4','mfs5',
+    'pvs1','pvs2','pvs3','pvs4','pvs5','pvs6',
+    'rl_readiness','sp_health_rating'
+  ];
+  sliderIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) d[id] = el.value;
+  });
+
+  // Single-select radios
+  const radioNames = [
+    's1_gender','s1_english','s1_familiarity',
+    's2_meds','s2_surgeries','s2_hormonal','s2_allergies',
+    'mv_days','mv_incidental','mv_limitations',
+    't3_reach','t4_position','t5_rating','t8_score',
+    'n_pattern','n_diet','n_protein',
+    'mf_stress','mf_recovery',
+    'pv_blood_panel','pv_supplements','pv_risk_awareness','pv_checkups',
+    'rl_hours','rl_schedule','rl_travel','rl_peak_energy','rl_budget','rl_support','rl_obstacle',
+    'ed_blood','ed_blood_recency','ed_nad','ed_nad_test',
+    'ed_nad_precursor','ed_nad_prec_type','ed_nad_duration',
+    'ed_dna','g_motivation','c3'
+  ];
+  radioNames.forEach(name => {
+    const el = document.querySelector('[name="' + name + '"]:checked');
+    if (el) d[name] = el.value;
+  });
+
+  // Multi-select checkboxes
+  const checkboxNames = [
+    's1_books','s2_conditions','s2_family','mv_types','n_symptoms',
+    'mf_practices','ed_blood_markers','ed_dna_platform','ed_functional',
+    'ed_wearables','rl_resources','g_priorities'
+  ];
+  checkboxNames.forEach(name => {
+    d[name] = Array.from(document.querySelectorAll('[name="' + name + '"]:checked')).map(e => e.value);
+  });
+
+  // Consent checkboxes
+  ['c1','c2','c4','c5'].forEach(id => {
+    const el = document.getElementById(id);
+    d[id] = el ? el.checked : false;
+  });
+
+  return d;
+}
+
+// ── SUBMIT ────────────────────────────────────────────────
+async function submitForm() {
+  // Validate consents
+  let consentOk = true;
+  ['c1','c2','c4','c5'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el || !el.checked) {
+      if (el) el.closest('.consent-check').style.outline = '2px solid #C0392B';
+      consentOk = false;
+    } else {
+      el.closest('.consent-check').style.outline = 'none';
+    }
+  });
+
+  const sig = document.getElementById('c_signature');
+  const dt = document.getElementById('c_date');
+  if (!sig || !sig.value.trim()) { if (sig) sig.classList.add('invalid'); consentOk = false; }
+  if (!dt || !dt.value) { if (dt) dt.classList.add('invalid'); consentOk = false; }
+
+  if (!consentOk) {
+    const errEl = document.getElementById('error-msg');
+    errEl.textContent = 'Please complete all required consent items and add your signature below.';
+    errEl.style.display = 'block';
+    document.querySelector('.consent-item').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  const btn = document.getElementById('submit-btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  const data = collectData();
+
+  // !! REPLACE with your deployed Apps Script Web App URL !!
+  const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    // no-cors: cannot read response body, but if no error thrown = success
+    document.getElementById('main-form').style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    btn.textContent = 'Submit Your Intake →';
+    btn.disabled = false;
+    const errEl = document.getElementById('error-msg');
+    errEl.textContent = 'Something went wrong. Please try again or email your responses directly to doych@doychzone.com.';
+    errEl.style.display = 'block';
+  }
+}
+</script>
+</body>
+</html>
